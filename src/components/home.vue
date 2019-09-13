@@ -1,6 +1,6 @@
 <template>
   <div style="padding-bottom:44px;">
-    <Carousel autoplay v-model="value2" radius-dot loop height="300">
+    <Carousel autoplay v-model="value2" radius-dot loop>
       <CarouselItem>
         <div class="demo-carousel">
           <img src="../assets/banner1.jpg" alt />
@@ -8,12 +8,12 @@
       </CarouselItem>
       <CarouselItem>
         <div class="demo-carousel">
-          <img src="../assets/banner2.gif" alt />
+          <img src="../assets/banner2.jpg" alt />
         </div>
       </CarouselItem>
       <CarouselItem>
         <div class="demo-carousel">
-          <img src="../assets/banner3.jpg" alt />
+          <img src="../assets/banner3.png" alt />
         </div>
       </CarouselItem>
       <CarouselItem>
@@ -27,20 +27,22 @@
         </div>
       </CarouselItem>
     </Carousel>
-    <div style="margin-top:10px">
-      <Button type="primary" style="width:80%;background:#6281FD;font-size:16px">活动奖品</Button>
+    <Row>
+        <Col class-name="list-box" v-for="item in list" span="8" :key="item.icon">
+        <div>
+          <Icon :type="item.icon" size='18' />
+          <span> {{item.text}}</span>
+        </div>
+        <div style="line-height:30px">{{item.count}}</div>
+        </Col>
+    </Row>
+    <div class="vote" style="margin-top:5px;border-top:1px solid #eee">
+      <Icon type="md-time" size="18"/>
+      <span> 投票日期: 2019-09-10到2019-09-13</span>
     </div>
-    <div style="text-align:center;padding: 10px 15px;font-weight:bold;color:black;">
-      <div style="color:red">十一点整人气王：</div>
-      <div>活动开始每日11:00整，票数第一的商家除了将获得活动链接首页价值1000元黄金广告位为期一天的免费推广，还可以获得本公司赠送的相应票数礼物</div>
-      <div style="color:#FFC000">●●●●●●●●●●●●●●●●●●●●●●●●●●</div>
-      <div style="color:red">大赛奖品如下：</div>一等奖：1名（排名第一）
-      <br />1.最具人气荣誉奖牌一块
-      <br />2.获的 iPhone X 一台
-      <br />3.免费网页推广 三个月
-      <br />
-      <img src="../assets/prize1-1.png" style="width:80%;margin-top:15px" alt />
-      <img src="../assets/prize1-2.jpg" style="width:80%" alt />
+    <div class="vote">
+      <Icon type="md-time" size="18"/>
+      <span> 活动剩余: {{count}}</span>
     </div>
     <router-link :to="{name:'ranking'}">ranking</router-link>
 
@@ -58,21 +60,38 @@
 
 <script>
 // import HelloWorld from './components/HelloWorld.vue'
-import { Button, Carousel, CarouselItem } from "iview";
+
 import Nav from "./nav.vue";
 
 export default {
   name: "app",
   data() {
     return {
-      value2: 0
+      value2: 0,
+      height:(window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth)*1080/1920
+      ,
+      list:[
+        {
+          icon:'ios-attach',
+          text:'参与选手',
+          count:73
+        },
+        {
+          icon:'ios-thumbs-up-outline',
+          text:'累计投票',
+          count:23463
+        },
+        {
+          icon:'ios-pulse-outline',
+          text:'访问量',
+          count:23952
+        },
+      ],
+      timer:'',
+      count:''
     };
   },
   components: {
-    // HelloWorld
-    Button,
-    Carousel,
-    CarouselItem,
     Nav
   },
   methods: {
@@ -82,8 +101,32 @@ export default {
     },
     reductionCount: function() {
       this.$store.commit("reduction");
+    },
+    countDown: function (){
+       var time_end = new Date(1569605099);
+       var time_now = Math.round(new Date() / 1000)
+       var time_distance = time_end - time_now;
+      if (time_distance > 0) {
+          var int_day = Math.floor(time_distance / (60 * 60 * 24));
+          var int_hour = Math.floor(time_distance / (60 * 60)) - (int_day * 24);
+          var int_minute = Math.floor(time_distance / 60) - (int_day * 24 * 60) - (int_hour * 60);
+          var int_second = Math.floor(time_distance) - (int_day * 24 * 60 * 60) - (int_hour * 60 * 60) - (int_minute * 60);
+          if (int_hour < 10) int_hour = "0" + int_hour;
+          if (int_minute < 10) int_minute = "0" + int_minute;
+          if (int_second < 10) int_second = "0" + int_second;
+          this.count = int_day + "天" + int_hour + "时" + int_minute + "分" + int_second + "秒";
+      } else {
+this.count = '结束';
+         clearInterval(this.timer);
+      }
     }
-  }
+  },
+  mounted() {
+      this.timer = setInterval(this.countDown, 100);
+    },
+    beforeDestroy() {
+      clearInterval(this.timer);
+    }
 };
 </script>
 
@@ -98,7 +141,7 @@ export default {
 .demo-carousel {
   background: #fff;
   width: 100%;
-  height: 300px;
+  height: 100%;
 }
 .demo-carousel img {
   max-width: 100%;
@@ -108,5 +151,20 @@ export default {
 .count {
   font-size: 18px;
   font-weight: bold;
+}
+.list-box{
+  border-right:1px solid #ddd;
+  margin-top: 15px;
+}
+.vote{
+  text-align: left;
+  padding:5px 10px;
+  border-bottom: 1px solid #ddd;
+}
+.vote i,.vote span{
+  vertical-align: middle
+}
+.list-box:last-child{
+  border-right:none
 }
 </style>

@@ -37,10 +37,9 @@
 
 <script>
 // {{ $route.name}}
-import { Icon } from "iview";
 export default {
   components: {
-    Icon
+    
   }
 };
 </script>

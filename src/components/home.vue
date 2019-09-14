@@ -49,8 +49,16 @@
     </div>
     <div style="margin-top:10px">
       <ButtonGroup style="width:60%">
-        <Button style="width:50%" @click="btnType=0" :class="btnType==0?'ivu-btn-primary':''">人气选手</Button>
-        <Button style="width:50%" @click="btnType=1" :class="btnType==1?'ivu-btn-primary':''">最新参与</Button>
+        <Button
+          style="width:50%"
+          @click="changeBtnType(0)"
+          :class="btnType==0?'ivu-btn-primary':''"
+        >人气选手</Button>
+        <Button
+          style="width:50%"
+          @click="changeBtnType(1)"
+          :class="btnType==1?'ivu-btn-primary':''"
+        >最新参与</Button>
       </ButtonGroup>
     </div>
     <Row :gutter="5" style="padding:0 10px;margin-top:10px">
@@ -78,6 +86,10 @@
       </Col>
     </Row>
 
+    <div style="margin-top:10px">查看更多</div>
+    <div style="margin-top:10px">
+      <Button style="width:90%;font-size:16px" type="primary">活 动 规 则</Button>
+    </div>
     <img alt="Vue logo" src="../assets/logo.png" />
     <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
     <div>
@@ -137,7 +149,7 @@ export default {
           id: 24,
           name: "简约书吧",
           count: 5813,
-          img: require("../assets/banner2.jpg")
+          img: require("../assets/banner4.jpg")
         },
         {
           id: 64,
@@ -149,25 +161,25 @@ export default {
           id: 17,
           name: "天空之城1",
           count: 5813,
-          img: require("../assets/banner2.jpg")
+          img: require("../assets/banner4.jpg")
         },
         {
           id: 22,
           name: "天空之城2",
           count: 5813,
-          img: require("../assets/banner2.jpg")
+          img: require("../assets/banner4.jpg")
         },
         {
           id: 33,
           name: "天空之城3",
           count: 5813,
-          img: require("../assets/banner2.jpg")
+          img: require("../assets/banner5.jpg")
         },
         {
           id: 44,
           name: "天空之城4",
           count: 5813,
-          img: require("../assets/banner2.jpg")
+          img: require("../assets/banner5.jpg")
         },
         {
           id: 55,
@@ -237,6 +249,10 @@ export default {
         this.count = "0天 0时 00分 0秒";
         clearInterval(this.timer);
       }
+    },
+    changeBtnType: function(idx) {
+      this.btnType = idx;
+      this.players.reverse();
     }
   },
   mounted() {

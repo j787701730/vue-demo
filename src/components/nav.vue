@@ -38,9 +38,7 @@
 <script>
 // {{ $route.name}}
 export default {
-  components: {
-    
-  }
+  components: {}
 };
 </script>
 
@@ -62,10 +60,10 @@ export default {
   font-size: 12px;
   display: inline-block;
   width: 20%;
-  color: #9F9C99;
+  color: #9f9c99;
   cursor: pointer;
 }
-.bottom-nav .active{
-  color: #7088FD;
+.bottom-nav .active {
+  color: #7088fd;
 }
 </style>

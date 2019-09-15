@@ -3,11 +3,8 @@ import App from "./App.vue";
 import store from "./store";
 import VueRouter from "vue-router";
 
-import iView from "iview";
-import "iview/dist/styles/iview.css";
-
 Vue.config.productionTip = false;
-Vue.use(iView);
+
 Vue.use(VueRouter);
 import Home from "./components/home.vue";
 import Ranking from "./components/ranking.vue";

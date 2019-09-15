@@ -1,28 +1,20 @@
 <template>
   <div style="padding-bottom:44px;">
-    <Carousel autoplay v-model="value2" radius-dot loop>
-      <CarouselItem>
-        <div class="demo-carousel">
-          <img src="../assets/banner2.jpg" alt />
-        </div>
-      </CarouselItem>
-      <CarouselItem>
-        <div class="demo-carousel">
-          <img src="../assets/banner3.png" alt />
-        </div>
-      </CarouselItem>
-      <CarouselItem>
-        <div class="demo-carousel">
-          <img src="../assets/banner4.jpg" alt />
-        </div>
-      </CarouselItem>
-      <CarouselItem>
-        <div class="demo-carousel">
-          <img src="../assets/banner5.jpg" alt />
-        </div>
-      </CarouselItem>
+    <Carousel autoplay dots>
+      <div class="demo-carousel">
+        <img src="../assets/banner2.jpg" alt />
+      </div>
+      <div class="demo-carousel">
+        <img src="../assets/banner3.png" alt />
+      </div>
+      <div class="demo-carousel">
+        <img src="../assets/banner4.jpg" alt />
+      </div>
+      <div class="demo-carousel">
+        <img src="../assets/banner5.jpg" alt />
+      </div>
     </Carousel>
-    <Row>
+    <Row style="margin:0">
       <Col class-name="list-box" v-for="item in list" span="8" :key="item.icon">
         <div>
           <Icon :type="item.icon" size="18" style="vertical-align: middle;" />
@@ -32,15 +24,14 @@
       </Col>
     </Row>
     <div class="vote" style="margin-top:5px;border-top:1px solid #eee">
-      <Icon type="md-time" size="18" />
+      <Icon type="clock-circle" size="18" />
       <span>&nbsp;投票日期: 2019-09-10到2019-09-13</span>
     </div>
     <div class="vote">
-      <Icon type="md-time" size="18" />
-      <span>&nbsp;活动剩余: {{count}}</span>
+      <Time></Time>
     </div>
     <div style="padding: 0 15px;margin-top:8px">
-      <Input search enter-button="搜索" placeholder="请输入编号或姓名" />
+      <Input placeholder="请输入编号或姓名" />
     </div>
     <div style="margin-top:10px" class="btns-div">
       <Button type="primary">规则/奖品</Button>&nbsp;
@@ -48,20 +39,18 @@
       <Button type="primary">我要报名</Button>
     </div>
     <div style="margin-top:10px">
-      <ButtonGroup style="width:60%">
-        <Button
-          style="width:50%"
-          @click="changeBtnType(0)"
-          :class="btnType==0?'ivu-btn-primary':''"
-        >人气选手</Button>
-        <Button
-          style="width:50%"
-          @click="changeBtnType(1)"
-          :class="btnType==1?'ivu-btn-primary':''"
-        >最新参与</Button>
-      </ButtonGroup>
+      <Button
+        :type="btnType==0?'primary':'default'"
+        style="width:30%"
+        @click="changeBtnType(0)"
+      >人气选手</Button>
+      <Button
+        :type="btnType==1?'primary':'default'"
+        style="width:30%"
+        @click="changeBtnType(1)"
+      >最新参与</Button>
     </div>
-    <Row :gutter="5" style="padding:0 10px;margin-top:10px">
+    <Row :gutter="5" style="padding:0 10px;margin:10px 0 0">
       <Col span="12" v-for="play in players" :key="play.id">
         <div style="border:1px solid #ddd;margin-bottom:10px">
           <div class="player-img">
@@ -76,7 +65,7 @@
     text-overflow: ellipsis;"
           >{{play.name}}</div>
           <div>
-            <Button style="float:left;margin-left:10px;width:35%">投票</Button>
+            <Button type="default" style="float:left;margin-left:10px;width:35%">投票</Button>
             <span
               style="float:right;margin-right:10px;line-height:32px;color:red;font-size:16px"
             >{{play.count}}票</span>
@@ -97,7 +86,7 @@
     </div>
 
     <Button type="primary" @click="addCount">+2</Button>&nbsp;
-    <Button type="success" @click="reductionCount">-1</Button>
+    <Button type="primary" @click="reductionCount">-1</Button>
     <Nav></Nav>
   </div>
 </template>
@@ -106,6 +95,8 @@
 // import HelloWorld from './components/HelloWorld.vue'
 
 import Nav from "./nav.vue";
+import Time from "./time";
+import { Carousel, Row, Col, Button, Icon, Input } from "ant-design-vue";
 
 export default {
   name: "app",
@@ -121,17 +112,17 @@ export default {
         1920,
       list: [
         {
-          icon: "ios-attach",
+          icon: "paper-clip",
           text: "参与选手",
           count: 73
         },
         {
-          icon: "ios-thumbs-up-outline",
+          icon: "like",
           text: "累计投票",
           count: 23463
         },
         {
-          icon: "ios-pulse-outline",
+          icon: "pulse",
           text: "访问量",
           count: 23952
         }
@@ -203,7 +194,14 @@ export default {
     };
   },
   components: {
-    Nav
+    Nav,
+    Carousel,
+    Row,
+    Col,
+    Button,
+    Icon,
+    Input,
+    Time
   },
   methods: {
     addCount: function() {
@@ -256,7 +254,7 @@ export default {
     }
   },
   mounted() {
-    this.timer = setInterval(this.countDown, 100);
+    // this.timer = setInterval(this.countDown, 100);
   },
   beforeDestroy() {
     clearInterval(this.timer);

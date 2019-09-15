@@ -1,31 +1,24 @@
 <template>
   <div style="padding-bottom:44px;">
-    <Carousel autoplay v-model="value2" radius-dot loop>
-      <CarouselItem>
-        <div class="demo-carousel">
-          <img src="../assets/banner1.jpg" alt />
-        </div>
-      </CarouselItem>
-      <CarouselItem>
-        <div class="demo-carousel">
-          <img src="../assets/banner2.jpg" alt />
-        </div>
-      </CarouselItem>
-      <CarouselItem>
-        <div class="demo-carousel">
-          <img src="../assets/banner3.png" alt />
-        </div>
-      </CarouselItem>
-      <CarouselItem>
-        <div class="demo-carousel">
-          <img src="../assets/banner4.jpg" alt />
-        </div>
-      </CarouselItem>
-      <CarouselItem>
-        <div class="demo-carousel">
-          <img src="../assets/banner5.jpg" alt />
-        </div>
-      </CarouselItem>
+    <Carousel autoplay dots loop>
+      <div class="demo-carousel">
+        <img src="../assets/banner1.jpg" alt />
+      </div>
+      <div class="demo-carousel">
+        <img src="../assets/banner2.jpg" alt />
+      </div>
+
+      <div class="demo-carousel">
+        <img src="../assets/banner3.png" alt />
+      </div>
+
+      <div class="demo-carousel">
+        <img src="../assets/banner4.jpg" alt />
+      </div>
+
+      <div class="demo-carousel">
+        <img src="../assets/banner5.jpg" alt />
+      </div>
     </Carousel>
     <div style="text-align:center;padding: 10px 15px;font-weight:bold;color:black;">
       <div style="color:red">十一点整人气王：</div>
@@ -45,6 +38,7 @@
 
 <script>
 import Nav from "./nav.vue";
+import { Carousel, Row, Col, Button } from "ant-design-vue";
 export default {
   data() {
     return {
@@ -58,7 +52,11 @@ export default {
     };
   },
   components: {
-    Nav
+    Nav,
+    Carousel,
+    Row,
+    Col,
+    Button
   }
 };
 </script>

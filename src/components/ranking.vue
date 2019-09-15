@@ -1,31 +1,25 @@
 <template>
   <div style="padding-bottom:44px;">
     <Carousel autoplay v-model="value2" radius-dot loop>
-      <CarouselItem>
-        <div class="demo-carousel">
-          <img src="../assets/banner1.jpg" alt />
-        </div>
-      </CarouselItem>
-      <CarouselItem>
-        <div class="demo-carousel">
-          <img src="../assets/banner2.jpg" alt />
-        </div>
-      </CarouselItem>
-      <CarouselItem>
-        <div class="demo-carousel">
-          <img src="../assets/banner3.png" alt />
-        </div>
-      </CarouselItem>
-      <CarouselItem>
-        <div class="demo-carousel">
-          <img src="../assets/banner4.jpg" alt />
-        </div>
-      </CarouselItem>
-      <CarouselItem>
-        <div class="demo-carousel">
-          <img src="../assets/banner5.jpg" alt />
-        </div>
-      </CarouselItem>
+      <div class="demo-carousel">
+        <img src="../assets/banner1.jpg" alt />
+      </div>
+
+      <div class="demo-carousel">
+        <img src="../assets/banner2.jpg" alt />
+      </div>
+
+      <div class="demo-carousel">
+        <img src="../assets/banner3.png" alt />
+      </div>
+
+      <div class="demo-carousel">
+        <img src="../assets/banner4.jpg" alt />
+      </div>
+
+      <div class="demo-carousel">
+        <img src="../assets/banner5.jpg" alt />
+      </div>
     </Carousel>
     <div style="margin-top:10px">
       <Button type="primary" style="width:80%;background:#6281FD;font-size:16px">最新排名</Button>
@@ -66,6 +60,7 @@
 
 <script>
 import Nav from "./nav.vue";
+import { Carousel, Row, Col, Button } from "ant-design-vue";
 export default {
   data() {
     return {
@@ -141,7 +136,11 @@ export default {
     };
   },
   components: {
-    Nav
+    Nav,
+    Carousel,
+    Row,
+    Col,
+    Button
   }
 };
 </script>
